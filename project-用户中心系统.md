@@ -64,7 +64,7 @@
 3. 对密码进行加密(密码千万不要以明文存储到数据库中)
 4. 向数据库中插入用户数据
 
-#### 敲代码
+##### 注册逻辑的代码实现
 
 1. 所有的业务逻辑方法都写在Service层中的接口类，点击业务方法AIt + Enter实现方法就可以快速在接口的实现类中生成代码
 2. 接下来就是在实现类中编写具体的代码，借助apache.commons-lang3依赖中的Utils减少编写的代码量，比如StringUtils.isAnyBlank判断是否有空值
@@ -83,4 +83,35 @@
         }
 ```
 
-4. 账户不包含特殊字符可以使用正则表达式（AI智能补全）
+4. 使账户不包含特殊字符可以使用正则表达式（AI智能补全）
+
+5. 对密码进行加密：
+
+   1. 引入Spring Security依赖
+   2. 创建一个专门的配置类，用于规定密码加密的相关配置
+
+   ```java
+   package com.bocao.usercenter.config;
+   
+   import org.springframework.context.annotation.Bean;
+   import org.springframework.context.annotation.Configuration;
+   import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+   import org.springframework.security.crypto.password.PasswordEncoder;
+   
+   @Configuration
+   public class SecurityConfig {
+   
+       @Bean
+       public PasswordEncoder passwordEncoder() {
+           // 使用 BCrypt 算法，这是目前非常安全和流行的选择
+           return new BCryptPasswordEncoder();
+       }
+   }
+   ```
+
+   3. 在Service层中注入依赖，调用方法对密码进行加密
+
+#### 设计登入功能
+
+
+
