@@ -4,4 +4,4 @@
 ## Project Study
 - [用户中心系统](https://github.com/2cux/StudyPath/blob/main/project-%E7%94%A8%E6%88%B7%E4%B8%AD%E5%BF%83%E7%B3%BB%E7%BB%9F.md)
 ## Algorithm Study
-- [算法-Java]()
+- [算法-Java](https://github.com/2cux/StudyPath/blob/main/%E7%AE%97%E6%B3%95-Java.md)
