@@ -48,7 +48,7 @@
 
 <img src="./images/image-20260126213147810.png" alt="image-20260126213147810" width="700"/>
 
-## 4. 功能模块设计与实现
+## 4. 后端开发
 
 ### 4.1. 用户注册
 
@@ -206,18 +206,18 @@
 > request.getSession().getAttribute(用户登入态键)的作用是获取当前用户的状态 
 >
 > ```java
->  /*
->       辅助方法:判断用户的管理员身份
->      */
->     private boolean isAdmin(HttpServletRequest request) {
->         //仅管理员可查询
->         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
->         User user = (User) userObj;
->         if (user == null || user.getRole() == NORMAL_USER_ROLE) {
->             return false;
->         }
->         return true;
->     }
+> /*
+>    辅助方法:判断用户的管理员身份
+>   */
+>  private boolean isAdmin(HttpServletRequest request) {
+>      //仅管理员可查询
+>      Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+>      User user = (User) userObj;
+>      if (user == null || user.getRole() == NORMAL_USER_ROLE) {
+>          return false;
+>      }
+>      return true;
+>  }
 > ```
 >
 > 
@@ -255,18 +255,66 @@
 > request.getSession().getAttribute(用户登入态键)的作用是获取当前用户的状态 
 >
 > ```java
->  /*
->       辅助方法:判断用户的管理员身份
->      */
->     private boolean isAdmin(HttpServletRequest request) {
->         //仅管理员可查询
->         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
->         User user = (User) userObj;
->         if (user == null || user.getRole() == NORMAL_USER_ROLE) {
->             return false;
->         }
->         return true;
->     }
+> /*
+>    辅助方法:判断用户的管理员身份
+>   */
+>  private boolean isAdmin(HttpServletRequest request) {
+>      //仅管理员可查询
+>      Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+>      User user = (User) userObj;
+>      if (user == null || user.getRole() == NORMAL_USER_ROLE) {
+>          return false;
+>      }
+>      return true;
+>  }
 > ```
 >
 > 在实体类的isdelete中添加@TableLogic，removeById就是逻辑删除了
+
+## 5. 前端开发
+
+> 对于要复用且不易改变的资源，我们可以创建一个constants常量包，里面存放着各种常量资源，比如logo
+
+### 5.1. 登入功能
+
+- 简化页面
+
+主要就是删除不需要的代码同时把现成的代码修改为你想要的代码
+
+> 这里有一些常用的快捷键：
+>
+> 1.Ctrl + Shift + F：全局搜索
+>
+> 2.Ctrl + 鼠标左键：查看源码
+
+- 代理(Proxy)
+
+> 正向代理：为客户端办事
+>
+> 反向代理：为服务器办事
+>
+> 二者都要经过代理服务器连接后端服务器
+
+- 前后端交互
+
+> 注意前端和后端的变量名要一致，后端叫啥名，前端就叫啥名
+>
+> 前端一般用ajax来请求后端，axios封装了ajax
+
+> 真正实现前后端交互的地方是API文档，/api作为暗号让proxy配置文件里的代理，连接到后端，具体怎么连接后端就要在proxy配置文件里编写代码
+
+> 结束进程：
+>
+> netstat -aon | findstr "8080"
+> taskkill /F /PID 12345
+
+### 5.2. 注册功能
+
+> 注册功能可以通过复制粘贴登入功能快速开发
+
+### 5.3. 结束
+
+前端的开发到此为止，主要的问题都来自Ant Design Pro 这个现成的开发框架，它并不适用于目前开发的用户界面，而是适用于管理界面，再开发下去知识徒增时间
+
+## 6. 项目部署
+
